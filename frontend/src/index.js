@@ -7,8 +7,19 @@ import { BrowserRouter as Router } from 'react-router-dom';
 import { Amplify } from 'aws-amplify';
 import config from './config';
 import { initSentry } from './lib/errorLib';
+import * as Sentry from "@sentry/react";
+import { Integrations } from "@sentry/tracing";
 
 initSentry();
+Sentry.init({
+  dsn: "https://b59b481eebec42f9816dfa86c6427bb0@o1028350.ingest.sentry.io/5995710",
+  integrations: [new Integrations.BrowserTracing()],
+
+  // Set tracesSampleRate to 1.0 to capture 100%
+  // of transactions for performance monitoring.
+  // We recommend adjusting this value in production
+  tracesSampleRate: 1.0,
+});
 
 Amplify.configure({
   Auth: {

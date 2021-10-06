@@ -10,6 +10,15 @@ import { useHistory } from "react-router-dom";
 import { onError } from "./lib/errorLib";
 import ErrorBoundary from "./components/ErrorBoundary";
 
+Sentry.init({
+  dsn: "https://b59b481eebec42f9816dfa86c6427bb0@o1028350.ingest.sentry.io/5995710",
+  integrations: [new Integrations.BrowserTracing()],
+
+  // Set tracesSampleRate to 1.0 to capture 100%
+  // of transactions for performance monitoring.
+  // We recommend adjusting this value in production
+  tracesSampleRate: 1.0,
+});
 
 function App() {
   const history = useHistory();
